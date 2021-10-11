@@ -1,7 +1,4 @@
 .Button{
-    background-color: skyblue;
-    color: white;
-
     font-size: x-large;
     font-weight: 900;
     padding: 5px 10px;
@@ -23,4 +20,7 @@
 }
 .warning{
     background-color: tomato;
+}
+.clicked{
+
 }

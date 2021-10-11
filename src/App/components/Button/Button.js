@@ -21,8 +21,13 @@ Button.propTypes = {
     lorsqueJeClique: PropTypes.func.isRequired,
     text: PropTypes.string,
     children: PropTypes.any,
-    bgColor: PropTypes.string,
-    color: PropTypes.string,
+    bgColor: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     style: PropTypes.object,
 };
+Button.defaultProps={
+    bgColor: 'skyblue',
+    color: 'white',
+    lorsqueJeClique:()=>{}
+}
 export default Button;

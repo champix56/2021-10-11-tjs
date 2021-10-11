@@ -8,7 +8,7 @@ function App() {
         <img src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/finger-256.png" />
         Cliquez ici
       </Button>
-      <Button text="Un boutton" bgColor="tomato" color="lightgrey" style={{backgroundColor:'blue',textDecoration:'underline'}} lorsqueJeClique={()=>{}}/>
+      <Button text="Un boutton" color="blue" style={{textDecoration:'underline'}}/>
     </div>
   );
 }
