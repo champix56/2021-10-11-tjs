@@ -4,7 +4,7 @@ const Button = (props) => {
     console.log(props);
     return (
         <button className={styles.Button}>
-            {props.text}
+            jhiuhpiuhuihliuhiulhiluhdomuzhdiujs
         </button>
     );
 }
