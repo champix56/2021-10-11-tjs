@@ -11,3 +11,10 @@
     box-shadow: 15px 15px 20px GREY;
 
 }
+.Button img{
+    height:42px ;
+    width:42px;
+}
+.Button *{
+    vertical-align: middle;
+}
