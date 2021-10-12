@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import Navbar from './components/ui/Navbar/Navbar';
 import FlexLayout from './components/layouts/FlexLayout/FlexLayout';
-import MemeViewer, {demoMeme as defaultmeme} from './components/ui/MemeViewer/MemeViewer';
+import MemeViewer, { demoMeme as defaultmeme } from './components/ui/MemeViewer/MemeViewer';
 import MemeForm from './components/functionnals/MemeForm/MemeForm';
 interface Props {
 
@@ -22,13 +22,16 @@ export default class App extends Component<Props, State> {
   }
   render() {
     return (
-      <div className="App">
-        <Navbar></Navbar>
-        <FlexLayout>
-          <MemeViewer meme={defaultmeme.meme} image={defaultmeme.image} />
-          <MemeForm />
-        </FlexLayout>
-      </div>
+      <>
+        <div>{JSON.stringify(this.state)}</div>
+        <div className="App">
+          <Navbar></Navbar>
+          <FlexLayout>
+            <MemeViewer meme={defaultmeme.meme} image={defaultmeme.image} />
+            <MemeForm />
+          </FlexLayout>
+        </div>
+      </>
     )
   }
 }
