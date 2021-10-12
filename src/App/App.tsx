@@ -1,30 +1,33 @@
 import React, { Component } from 'react'
-import Button from './components/Button/Button'
-
+import './App.css'
+import Navbar from './components/ui/Navbar/Navbar';
+import FlexLayout from './components/layouts/FlexLayout/FlexLayout';
+import MemeViewer from './components/ui/MemeViewer/MemeViewer';
+import MemeForm from './components/functionnals/MemeForm/MemeForm';
 interface Props {
-  
+
 }
 interface State {
-  counter:number
+  counter: number
 }
 
 export default class App extends Component<Props, State> {
-  state = {counter:0, champs2:0}
-  componentDidMount(){
-    
+  state = { counter: 0, champs2: 0 }
+  componentDidMount() {
+
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log(arguments);
     console.log(this.state)
   }
   render() {
     return (
-      <div>
-        valeur du compteur :{this.state.counter}
-        <Button lorsqueJeClique={()=>{
-            this.setState({counter:this.state.counter+1});
-           // console.log(this.state);
-        }}>Cliquez ici</Button>
+      <div className="App">
+        <Navbar></Navbar>
+        <FlexLayout>
+          <MemeViewer />
+          <MemeForm />
+        </FlexLayout>
       </div>
     )
   }
