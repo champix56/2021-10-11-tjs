@@ -26,9 +26,9 @@ const MemeViewer = (props) => (
   <svg
     className={styles.MemeViewer}
     data-testid="MemeViewer"
-    viewBox={`0 0 ${props.image.w} ${props.image.h}`}
+    viewBox={`0 0 ${props.image?props.image.w:1024} ${props.image?props.image.h:1024}`}
   >
-    <image href={props.image.url} />
+    {props.image&&<image href={props.image.url} />}
     <text
       x={props.meme.x}
       y={props.meme.y}
