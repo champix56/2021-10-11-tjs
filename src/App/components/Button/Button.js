@@ -6,7 +6,7 @@ const Button = (props) => {
     return (
     <button
       type={props.type}
-      className={styles.Button}
+      className={`${styles.Button} ${styles.clicked}`}
       style={{...props.style,backgroundColor:props.bgColor,color:props.color}}
       onClick={(evt) => {
         console.log(evt);
@@ -17,6 +17,7 @@ const Button = (props) => {
     </button>
   );
 };
+
 Button.propTypes = {
     lorsqueJeClique: PropTypes.func.isRequired,
     text: PropTypes.string,
