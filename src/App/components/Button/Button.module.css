@@ -23,5 +23,5 @@
 }
 .clicked{
     border: 1px solid grey;
-    box-shadow: 7px 7px 20px GREY;
+    box-shadow: 2px 2px 15px GREY !important;
 }
