@@ -4,7 +4,7 @@ import styles from './Navbar.module.css';
 
 const Navbar = () => (
   <div className={styles.Navbar} data-testid="Navbar">
-    Navbar Component
+    
   </div>
 );
 
