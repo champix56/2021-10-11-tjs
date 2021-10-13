@@ -6,8 +6,9 @@ import MemeViewer, { demoMeme as defaultmeme, demoMeme } from './components/ui/M
 import MemeForm from './components/functionnals/MemeForm/MemeForm';
 import { ADR_SRV, RESSOURCES_NAME } from './config/config';
 import MemeThumbnail from './components/layouts/MemeThumbnail/MemeThumbnail';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import store from './store/store'
+import { connect } from 'react-redux';
 interface Props {
 
 }
@@ -36,7 +37,7 @@ interface Image {
   h: number,
 }
 
-export default class App extends Component<Props, State> {
+class App extends Component<any, State> {
   state = { memes: [], images: [], currentMeme: demoMeme.meme }
   componentDidMount() {
     console.log(store );
@@ -48,6 +49,7 @@ export default class App extends Component<Props, State> {
     console.log(this.state)
   }
   render() {
+    console.log(this.props);
     return (
       <>
         {/* <div>{JSON.stringify(this.state)}</div> */}
@@ -64,13 +66,20 @@ export default class App extends Component<Props, State> {
             <Route path="/Thumbnail">
               <MemeThumbnail>
                 {
-                  this.state.memes.map((e: Meme, i: number) => <MemeViewer key={`thumb-view-${i}`} meme={e} image={this.state.images.find((ee: Image) => ee.id === e.imageId)} />)
+                  this.props.memes.map((e: Meme, i: number) =>(
+                  <div key={`thumb-view-${i}`} onClick={()=>{
+                    this.props.setCurrent(e);
+                    //this.props.location.pathname='/Editor'
+                    this.props.history.push('/Editor',null)
+                    }}>
+                    <MemeViewer meme={e} image={this.props.images.find((ee: Image) => ee.id === e.imageId)} />
+                  </div>))
                 }
               </MemeThumbnail>
             </Route>
             <Route path="/Editor">
               <FlexLayout>
-                <MemeViewer meme={this.state.currentMeme} image={this.state.images.find((e: Image) => e.id === this.state.currentMeme.imageId)} />
+                <MemeViewer meme={this.props.current} image={this.props.images.find((e: Image) => e.id === this.props.current.imageId)} />
                 <MemeForm />
               </FlexLayout>
             </Route>
@@ -87,3 +96,17 @@ export default class App extends Component<Props, State> {
     )
   }
 }
+function mapStateToProps(state,ownProps){
+  return {
+    images:state.list.images,
+    memes:state.list.memes,
+    current: state.current,
+    ...ownProps
+  }
+}
+function mapDispatchToProps(dispatch,ownProps){
+  return {
+    setCurrent:(meme)=>dispatch({type:'UPDATE_CURRENT',value:meme})
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(App))
