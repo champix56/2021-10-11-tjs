@@ -6,13 +6,15 @@ import MemeViewer, { demoMeme as defaultmeme, demoMeme } from './components/ui/M
 import MemeForm from './components/functionnals/MemeForm/MemeForm';
 import { ADR_SRV, RESSOURCES_NAME } from './config/config';
 import MemeThumbnail from './components/layouts/MemeThumbnail/MemeThumbnail';
+import { Switch, Route, Link } from 'react-router-dom'
+
 interface Props {
 
 }
 interface State {
   memes: Array<{}>,
   images: Array<{}>,
-  currentMeme:Meme
+  currentMeme: Meme
 }
 interface Meme {
   id?: number,
@@ -35,7 +37,7 @@ interface Image {
 }
 
 export default class App extends Component<Props, State> {
-  state = { memes: [], images: [], currentMeme:demoMeme.meme}
+  state = { memes: [], images: [], currentMeme: demoMeme.meme }
   componentDidMount() {
     const pmemes = fetch(`${ADR_SRV}${RESSOURCES_NAME.memes}`).then(f => f.json())
     const pimages = fetch(`${ADR_SRV}${RESSOURCES_NAME.images}`).then(f => f.json())
@@ -55,19 +57,26 @@ export default class App extends Component<Props, State> {
         <div>{JSON.stringify(this.state)}</div>
         <div className="App">
           <Navbar></Navbar>
-          <MemeThumbnail>
-            {
-              this.state.memes.map((e:Meme, i:number) =><MemeViewer meme={e} image={this.state.images.find((ee:Image) => ee.id === e.imageId)} />)
-
-            }
-          </MemeThumbnail>
-
-
-          <FlexLayout>
-            <MemeViewer meme={this.state.currentMeme} image={this.state.images.find((e:Image)=>e.id===this.state.currentMeme.imageId)} />
-            <MemeForm meme={this.state.currentMeme} onFormChange={(meme:Meme)=>{this.setState({currentMeme:meme})}} />
-          </FlexLayout>
-
+          <Switch>
+            <Route path="/">
+              <h1>Demat breizh</h1>
+              <h2>degemer mat im meme generator</h2>
+              |&nbsp;<Link to="/Thumbnail">Liens Thumbnail</Link>&nbsp;|&nbsp;<Link to="/Editor">Liens editor</Link>&nbsp;|
+            </Route>
+            <Route path="/Thumbnail">
+              <MemeThumbnail>
+                {
+                  this.state.memes.map((e: Meme, i: number) => <MemeViewer meme={e} image={this.state.images.find((ee: Image) => ee.id === e.imageId)} />)
+                }
+              </MemeThumbnail>
+            </Route>
+            <Route path="/Editor">
+              <FlexLayout>
+                <MemeViewer meme={this.state.currentMeme} image={this.state.images.find((e: Image) => e.id === this.state.currentMeme.imageId)} />
+                <MemeForm meme={this.state.currentMeme} onFormChange={(meme: Meme) => { this.setState({ currentMeme: meme }) }} />
+              </FlexLayout>
+            </Route>
+          </Switch>
         </div>
       </>
     )
