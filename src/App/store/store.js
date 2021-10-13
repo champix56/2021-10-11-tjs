@@ -53,13 +53,15 @@ function reducerCurrentMeme(state=initialMeme,action){
     switch(action.type){
         case 'UPDATE_CURRENT':return {...action.value};
         case 'SAVE_CURRENT':
-            fetch(`${ADR_SRV}${RESSOURCES_NAME.memes}${undefined!==state.id?'/'+state.id:''}`,
+            const url=`${ADR_SRV}${RESSOURCES_NAME.memes}${undefined!==state.id?'/'+state.id:''}`
+            fetch(url,
                 {
                     method:(undefined!==state.id?'PUT':'POST'),
                     headers:{
                         "Content-Type":"application/json",
                         "Accept":"application/json"
-                    }
+                    },
+                    body: JSON.stringify(state)
                 }
             ).then(f=>f.json()).then(o=>{
                 store.dispatch({type:REDUCER_ACTIONS.ADD_MEME,value:o})
