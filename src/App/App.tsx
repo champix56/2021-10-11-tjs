@@ -7,7 +7,7 @@ import MemeForm from './components/functionnals/MemeForm/MemeForm';
 import { ADR_SRV, RESSOURCES_NAME } from './config/config';
 import MemeThumbnail from './components/layouts/MemeThumbnail/MemeThumbnail';
 import { Switch, Route, Link } from 'react-router-dom'
-
+import store from './store/store'
 interface Props {
 
 }
@@ -39,6 +39,7 @@ interface Image {
 export default class App extends Component<Props, State> {
   state = { memes: [], images: [], currentMeme: demoMeme.meme }
   componentDidMount() {
+    store.dispatch({type:'APP_IS_MOUNT'});
     const pmemes = fetch(`${ADR_SRV}${RESSOURCES_NAME.memes}`).then(f => f.json())
     const pimages = fetch(`${ADR_SRV}${RESSOURCES_NAME.images}`).then(f => f.json())
     Promise.all([pmemes, pimages])
@@ -68,7 +69,7 @@ export default class App extends Component<Props, State> {
             <Route path="/Thumbnail">
               <MemeThumbnail>
                 {
-                  this.state.memes.map((e: Meme, i: number) => <MemeViewer meme={e} image={this.state.images.find((ee: Image) => ee.id === e.imageId)} />)
+                  this.state.memes.map((e: Meme, i: number) => <MemeViewer key={`thumb-view-${i}`} meme={e} image={this.state.images.find((ee: Image) => ee.id === e.imageId)} />)
                 }
               </MemeThumbnail>
             </Route>
