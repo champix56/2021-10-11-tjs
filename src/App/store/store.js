@@ -1,3 +1,4 @@
+import {createStore} from 'redux'
 export const initialState = {
     memes:[],
     images:[]
@@ -18,11 +19,14 @@ function reducer (state = initialState, action) {
             return state;
     }
 }
-let state=reducer(undefined,{type:'INIT'});
-console.log(state);
+// creation du store
+const store=createStore(reducer);
+//abo au magasin
+store.subscribe(()=>{
+    console.log(store.getState(), this);
+});
+//dispatch
+store.dipatch({type:REDUCER_ACTIONS.INIT_IMAGES,values:[{id:0},{id:1,chien:0}]});
+store.dipatch({type:REDUCER_ACTIONS.ADD_MEME,value:{id:0, text:''}});
 
-state=reducer(state,{type:REDUCER_ACTIONS.INIT_IMAGES, values:[{id:0},{id:1},{id:2}]});
-console.log(state);
-
-state=reducer(state,{type:REDUCER_ACTIONS.ADD_MEME, value:{id:0,text:'coucou'}});
-console.log(state);
+export default store;
