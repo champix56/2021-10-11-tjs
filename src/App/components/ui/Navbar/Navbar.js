@@ -27,7 +27,7 @@ const Navbar = () => (
             <Nav.Link href="#">Editor</Nav.Link>
           </LinkContainer>
           <LinkContainer to="/Editor/0">
-            <Nav.Link href="#pricing">Editor/0</Nav.Link>
+            <Nav.Link href="#">Editor/0</Nav.Link>
           </LinkContainer>
         </Nav>
       </Container>
