@@ -1,1 +1,18 @@
 .Navbar {}
+.title{
+    font-size: larger;
+    color: lightgray;
+    text-decoration: underline;
+    vertical-align: middle;
+}
+.titlememe{
+    font-weight: 900;
+}
+.titlecoma{
+    color:tomato;
+    font-size: xx-large;
+
+}
+.titlejs{
+    font-style: italic;
+}
