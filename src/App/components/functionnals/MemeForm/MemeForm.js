@@ -34,7 +34,9 @@ function MemeForm(props) {
           <h2>Image</h2>
         </label>
         <br />
-        <select name="image" id="image" value={state.current.imageId}>
+        <select name="image" id="image" value={state.current.imageId} onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,imageId:Number(evt.target.value)}});
+        }}>
           <option value={-1}>No images</option>
           {state.images.map((e,i)=><option value={e.id} key={`select-image-${i}`}>{e.titre}</option>)}
         </select>
@@ -48,6 +50,9 @@ function MemeForm(props) {
           id="text"
           type="text"
           value={state.current.text}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,text:evt.target.value}});
+        }}
         />
         <br />
         <label htmlFor="x">
@@ -59,6 +64,9 @@ function MemeForm(props) {
           id="x"
           type="number"
           value={state.current.x}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,x:Number(evt.target.value)}});
+        }}
         />
         <label htmlFor="y">
           <h2 style={{ display: "inline" }}>y :</h2>
@@ -69,6 +77,9 @@ function MemeForm(props) {
           id="y"
           type="number"
           value={state.current.y}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,y:Number(evt.target.value)}});
+        }}
         />
         <hr />
         <br />
@@ -81,6 +92,9 @@ function MemeForm(props) {
           id="color"
           type="color"
           value={state.current.color}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,color:evt.target.value}});
+        }}
           />
         <br />
         <label htmlFor="fontSize">
@@ -93,6 +107,9 @@ function MemeForm(props) {
           type="number"
           value={state.current.fontSize}
           min={0}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,fontSize:Number(evt.target.value)}});
+        }}
           />
         px
         <br />
@@ -108,13 +125,19 @@ function MemeForm(props) {
           min={100}
           step={100}
           max={900}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,fontWeight:evt.target.value}});
+        }}
           />
         <br />
         <input
-          name="underine"
+          name="underline"
           id="underline"
           type="checkbox"
           checked={state.current.underline}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,underline:evt.target.checked}});
+        }}
           />
         &nbsp;
         <label htmlFor="underline">
@@ -130,8 +153,12 @@ function MemeForm(props) {
           id="italic"
           type="checkbox"
           checked={state.current.italic}
+          onChange={(evt)=>{
+          store.dispatch({type:'UPDATE_CURRENT',value:{...state.current,italic:evt.target.checked}});
+        }}
           />
         <hr />
+        {JSON.stringify(state)}
         {/* <br />
         <label htmlFor="frameSizeX">
           <h2 style={{ display: "inline" }}>frame size X :</h2>
