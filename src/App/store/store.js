@@ -14,19 +14,21 @@ const REDUCER_PRIVATE_ACTIONS=Object.freeze({
 function reducer (state = initialState, action) {
     switch (action.type) {
         case REDUCER_ACTIONS.INIT_IMAGES :return {...state,images:[...action.values]};
-        case  REDUCER_ACTIONS.ADD_MEME :return {...state,memes:[ ...state.memes, action.value ] };
+        case REDUCER_ACTIONS.ADD_MEME :return {...state,memes:[ ...state.memes, action.value ] };
+        case 'APP_IS_MOUNT':return {...state,AppIsMount:true};
         default:
             return state;
     }
 }
 // creation du store
-const store=createStore(reducer);
+const store=createStore(reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 //abo au magasin
 store.subscribe(()=>{
-    console.log(store.getState(), this);
+    console.trace(store.getState(), this);
 });
 //dispatch
-store.dipatch({type:REDUCER_ACTIONS.INIT_IMAGES,values:[{id:0},{id:1,chien:0}]});
-store.dipatch({type:REDUCER_ACTIONS.ADD_MEME,value:{id:0, text:''}});
+store.dispatch({type:REDUCER_ACTIONS.INIT_IMAGES,values:[{id:0},{id:1,chien:0}]});
+store.dispatch({type:REDUCER_ACTIONS.ADD_MEME,value:{id:0, text:''}});
 
 export default store;
