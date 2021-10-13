@@ -58,10 +58,12 @@ export default class App extends Component<Props, State> {
         <div className="App">
           <Navbar></Navbar>
           <Switch>
-            <Route path="/">
+            <Route path="/" exact>
               <h1>Demat breizh</h1>
               <h2>degemer mat im meme generator</h2>
-              |&nbsp;<Link to="/Thumbnail">Liens Thumbnail</Link>&nbsp;|&nbsp;<Link to="/Editor">Liens editor</Link>&nbsp;|
+              |&nbsp;<Link to="/Thumbnail">Liens Thumbnail</Link>&nbsp;
+              |&nbsp;<Link to="/Editor">Liens editor</Link>&nbsp;
+              |&nbsp;<Link to="/innexistant">Liens editor</Link>&nbsp;|
             </Route>
             <Route path="/Thumbnail">
               <MemeThumbnail>
@@ -75,6 +77,13 @@ export default class App extends Component<Props, State> {
                 <MemeViewer meme={this.state.currentMeme} image={this.state.images.find((e: Image) => e.id === this.state.currentMeme.imageId)} />
                 <MemeForm meme={this.state.currentMeme} onFormChange={(meme: Meme) => { this.setState({ currentMeme: meme }) }} />
               </FlexLayout>
+            </Route>
+            {/* 
+              creation d'un ramasse miettes de routes
+              match toutes les routes n'ayant trouver de <Route path=""/>
+            */}
+            <Route path="/">
+              <h1>ERROR Url not found!!!</h1>
             </Route>
           </Switch>
         </div>
