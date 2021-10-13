@@ -39,14 +39,9 @@ interface Image {
 export default class App extends Component<Props, State> {
   state = { memes: [], images: [], currentMeme: demoMeme.meme }
   componentDidMount() {
-    store.dispatch({type:'APP_IS_MOUNT'});
-    const pmemes = fetch(`${ADR_SRV}${RESSOURCES_NAME.memes}`).then(f => f.json())
-    const pimages = fetch(`${ADR_SRV}${RESSOURCES_NAME.images}`).then(f => f.json())
-    Promise.all([pmemes, pimages])
-      .then(ar_ar => {
-        this.setState({ memes: ar_ar[0], images: ar_ar[1] });
-        return ar_ar;
-      })
+    console.log(store );
+    // store.dispatch({type:'APP_IS_MOUNT'});
+   
   }
   componentDidUpdate() {
     console.log(arguments);
@@ -76,7 +71,7 @@ export default class App extends Component<Props, State> {
             <Route path="/Editor">
               <FlexLayout>
                 <MemeViewer meme={this.state.currentMeme} image={this.state.images.find((e: Image) => e.id === this.state.currentMeme.imageId)} />
-                <MemeForm meme={this.state.currentMeme} onFormChange={(meme: Meme) => { this.setState({ currentMeme: meme }) }} />
+                <MemeForm />
               </FlexLayout>
             </Route>
             {/* 
