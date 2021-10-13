@@ -32,7 +32,7 @@ function reducer (state = initialState, action) {
             return state;
     }
 }
-const initialMeme= {
+export const initialMeme= {
     imageId: -1,
     text: "",
     x: 10,
