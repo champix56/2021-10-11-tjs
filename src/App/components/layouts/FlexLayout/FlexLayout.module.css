@@ -1,4 +1,4 @@
-.FlexLayout { display: flex; padding: 0 10px; height: 80vh;}
+.FlexLayout { display: flex; padding: 0 10px; height: 92vh;}
 .FlexLayout>*:first-child{ flex-grow: 1;}
 
 /* a suppr apres design */
